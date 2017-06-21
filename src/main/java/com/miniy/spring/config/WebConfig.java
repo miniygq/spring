@@ -3,11 +3,15 @@ package com.miniy.spring.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.io.IOException;
 
 /**
  * Created by Administrator on 2017/6/17.
@@ -39,5 +43,15 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    /**
+     * 配置 MultipartResolver
+     * @return
+     * @throws IOException
+     */
+    @Bean
+    public MultipartResolver multipartResolver()throws IOException {
+        return new StandardServletMultipartResolver();
     }
 }
